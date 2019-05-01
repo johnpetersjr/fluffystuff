@@ -1,0 +1,6 @@
+[
+  {
+    "Name": "image-id",
+    "Values": ["ami-putinstanceidhere","ami-andanotheronehere"]
+  }
+]
