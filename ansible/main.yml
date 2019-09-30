@@ -1,0 +1,20 @@
+---
+# Build out a master machine to control all the other machines
+- name: AWS Master Controller
+  hosts: all
+  vars:
+    ansible_user: ec2-user
+    ansible_become: yes
+    ansible_become_method: su
+    ansible_become_user: root
+    ansible_become_pass: RyanAndChrisAreMyHer0es!
+  tasks:
+    - name: Add user to sudoers file
+      lineinfile:
+      path: /etc/sudoers
+      regexp: '^ec2-user'
+      line: 'ec2-user ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
+    - mail:
+        subject: 'System {{ ansible_hostname }} has been successfully provisioned for proper usage.'
+      delegate_to: localhost
