@@ -1,0 +1,2 @@
+# Example to select records, only where errorCode is AccessDenied, limit to just one type of userAgent, and then parse results
+cat CloudTrailFile.json  | jq ' .Records[] | select(.errorCode=="AccessDenied") |select (.userAgent=="s3.amazonaws.com") | .requestParameters |"Bucket: " + .bucketName + " SourceHost:" + .Host'
